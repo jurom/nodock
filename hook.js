@@ -2,15 +2,17 @@ var spawn = require('child_process').spawn
 var githubhook = require('githubhook')
 
 var PROJECT = {
-  repository: 'ExampleApp',
-  name: 'example',
-  path: '../example',
+  repository: 'Web-App',
+  name: 'healthlinx',
+  path: '/home/ubuntu/healthlinx',
 }
 var DEPLOY_ARGS = {
   '--name': PROJECT.name + '-container',
   '-e': [
-    'host=0.0.0.0',
-    'port=80',
+    'hl_host=0.0.0.0',
+    'hl_port=80',
+    'hl_isDevelopment=false',
+    'hl_useBabelWatch=false',
   ],
   '-p': '80:80',
   '-v': [
