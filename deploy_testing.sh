@@ -17,5 +17,5 @@ sudo docker rm $1-container
 
 sudo docker rmi $1-app
 
-sudo docker build -t $1-app -f docker.app .
-sudo docker run "${@:4}" $1-app >> docker_stage.log
+sudo docker build -t $1-app -f testing.app .
+sudo docker run "${@:4}" $1-app

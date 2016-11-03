@@ -14,7 +14,7 @@ var DEPLOY_ARGS = {
     'hl_isDevelopment=false',
     'hl_useBabelWatch=false',
   ],
-  '-p': '80:80',
+  '-p': '127.0.0.1:4747:80',
   '-v': [
     PROJECT.path + ':/app',
     '/app/node_modules',
@@ -36,10 +36,11 @@ github.on('pull_request:' + PROJECT.repository, function(ref, data) {
     data.pull_request.base.ref === 'master'
   ) {
     var args = unpackArgs(DEPLOY_ARGS)
-    console.log('running', './deploy.sh ' + [PROJECT.name, PROJECT.path, 'master', args].join(' '))
+    var branch = 'origin/master'
+    console.log('running', './deploy.sh ' + [PROJECT.name, PROJECT.path, branch, args].join(' '))
 
     var child = spawn('bash',
-      ['./deploy.sh', PROJECT.name, PROJECT.path, 'master']
+      ['./deploy.sh', PROJECT.name, PROJECT.path, branch]
         .concat(args.split(' '))
         .filter(function(e) { return e !== '' })
     )
