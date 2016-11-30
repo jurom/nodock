@@ -3,7 +3,8 @@
 # $1    -> name of the image
 # $2    -> path to project
 # $3    -> branch to deploy
-# $4..  -> docker arguments
+# $4    -> docker app file
+# $5..  -> docker arguments
 
 cd $2
 
@@ -17,5 +18,5 @@ sudo docker rm $1-container
 
 sudo docker rmi $1-app
 
-sudo docker build -t $1-app -f docker.app .
-sudo docker run "${@:4}" $1-app >> docker_stage.log
+sudo docker build -t $1-app -f $4 .
+sudo docker run "${@:5}" $1-app

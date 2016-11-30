@@ -36,11 +36,12 @@ github.on('pull_request:' + PROJECT.repository, function(ref, data) {
     data.pull_request.base.ref === 'master'
   ) {
     var args = unpackArgs(DEPLOY_ARGS)
+    var dockerfile = 'docker.app'
     var branch = 'origin/master'
-    console.log('running', './deploy.sh ' + [PROJECT.name, PROJECT.path, branch, args].join(' '))
+    console.log('running', './deploy.sh ' + [PROJECT.name, PROJECT.path, branch, dockerfile, args].join(' '))
 
     var child = spawn('bash',
-      ['./deploy.sh', PROJECT.name, PROJECT.path, branch]
+      ['./deploy.sh', PROJECT.name, PROJECT.path, branch, dockerfile]
         .concat(args.split(' '))
         .filter(function(e) { return e !== '' })
     )
