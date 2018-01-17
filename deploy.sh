@@ -14,6 +14,7 @@ lockname="deploy_lock"
 touch ${lockname}
 
 git fetch --all
+git fetch --tags
 git branch deploy
 git checkout deploy
 git reset $3 --hard
